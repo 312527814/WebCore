@@ -1,0 +1,11 @@
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\bin\Debug\netcoreapp2.0\Web.Service.DataRepository.deps.json
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\bin\Debug\netcoreapp2.0\Web.Service.DataRepository.dll
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\bin\Debug\netcoreapp2.0\Web.Service.DataRepository.pdb
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\bin\Debug\netcoreapp2.0\Web.Service.dll
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\bin\Debug\netcoreapp2.0\Web.Service.pdb
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.csprojResolveAssemblyReference.cache
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.csproj.CoreCompileInputs.cache
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.AssemblyInfoInputs.cache
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.AssemblyInfo.cs
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.dll
+D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service.DataRepository\obj\Debug\netcoreapp2.0\Web.Service.DataRepository.pdb

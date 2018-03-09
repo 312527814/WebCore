@@ -1,0 +1,35 @@
+﻿@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/site.js"></script>
+</head>
+<body>
+    <input type="button" name="name" onclick="func()" value="dianji" />
+    <img src="/images/jwtr.png" />
+</body>
+</html>
+<script type="text/javascript">
+    function func() {
+        $.ajax({
+            url: 'http://localhost:57072/api/values/1',
+            type: 'get',
+            contentType: 'application/json',
+            xhrFields: {
+                withCredentials: true //配置http跨域请求中携带cookie
+            },
+            success: function (data) {
+                console.info(data);
+                example1.url = data;
+            },
+            error: function (error) {
+                console.info(error);
+            }
+        });
+    }
+
+
+</script>
