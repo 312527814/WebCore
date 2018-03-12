@@ -16,9 +16,9 @@ namespace Web.Service
         /// <param name="pToEncrypt"></param>
         /// <param name="sKey"></param>
         /// <returns></returns>
-        public static string EncryptForDES(string text, string key = "e2ecloud")
+        public static string EncryptForDES(string text, string key = "e2ecloud") 
         { 
-            DESCryptoServiceProvider des = new DESCryptoServiceProvider();
+            DESCryptoServiceProvider des = new DESCryptoServiceProvider(); 
             byte[] inputByteArray;
             inputByteArray = Encoding.Default.GetBytes(text);
             des.Key = ASCIIEncoding.ASCII.GetBytes(key);
