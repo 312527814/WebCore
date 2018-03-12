@@ -1,0 +1,5 @@
+﻿{
+  "Issuer": "Issuer",
+  "Audience": "Audience",
+  "SigningKey": "hellow-myjwt-myjwt"
+}

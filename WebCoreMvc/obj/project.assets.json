@@ -13019,11 +13019,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\WebCoreMvc\\WebCoreMvc.csproj",
+      "projectUniqueName": "D:\\我的项目\\WebCore\\WebCoreMvc\\WebCoreMvc.csproj",
       "projectName": "WebCoreMvc",
-      "projectPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\WebCoreMvc\\WebCoreMvc.csproj",
+      "projectPath": "D:\\我的项目\\WebCore\\WebCoreMvc\\WebCoreMvc.csproj",
       "packagesPath": "C:\\Users\\jh\\.nuget\\packages\\",
-      "outputPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\WebCoreMvc\\obj\\",
+      "outputPath": "D:\\我的项目\\WebCore\\WebCoreMvc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13042,11 +13042,11 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service\\Web.Service.csproj": {
-              "projectPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service\\Web.Service.csproj"
+            "D:\\我的项目\\WebCore\\Web.Service\\Web.Service.csproj": {
+              "projectPath": "D:\\我的项目\\WebCore\\Web.Service\\Web.Service.csproj"
             },
-            "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service.DataRepository\\Web.Service.DataRepository.csproj": {
-              "projectPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service.DataRepository\\Web.Service.DataRepository.csproj"
+            "D:\\我的项目\\WebCore\\Web.Service.DataRepository\\Web.Service.DataRepository.csproj": {
+              "projectPath": "D:\\我的项目\\WebCore\\Web.Service.DataRepository\\Web.Service.DataRepository.csproj"
             }
           }
         }

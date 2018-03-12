@@ -67,5 +67,26 @@ namespace Web.Service
             return estring;
 
         }
+
+
+        /// <summary>
+        /// 签名字符串
+        /// </summary>
+        /// <param name="prestr">需要签名的字符串</param>
+        /// <param name="_input_charset">编码格式</param>
+        /// <returns>签名结果</returns>
+        public static string Sign(string prestr, string key="my", string _input_charset = "utf-8")
+        {
+            StringBuilder sb = new StringBuilder(32);
+            MD5 md5 = new MD5CryptoServiceProvider();
+            prestr = prestr + key;
+            byte[] t = md5.ComputeHash(Encoding.GetEncoding(_input_charset).GetBytes(prestr));
+            for (int i = 0; i < t.Length; i++)
+            {
+                sb.Append(t[i].ToString("x").PadLeft(2, '0'));
+            }
+
+            return sb.ToString();
+        }
     }
 }

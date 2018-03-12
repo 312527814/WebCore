@@ -1736,11 +1736,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service\\Web.Service.csproj",
+      "projectUniqueName": "D:\\我的项目\\WebCore\\Web.Service\\Web.Service.csproj",
       "projectName": "Web.Service",
-      "projectPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service\\Web.Service.csproj",
+      "projectPath": "D:\\我的项目\\WebCore\\Web.Service\\Web.Service.csproj",
       "packagesPath": "C:\\Users\\jh\\.nuget\\packages\\",
-      "outputPath": "D:\\ProjectDemo\\新建文件夹\\CoreWeb\\Web.Service\\obj\\",
+      "outputPath": "D:\\我的项目\\WebCore\\Web.Service\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
