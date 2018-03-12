@@ -10,7 +10,6 @@ D:\ProjectDemo\新建文件夹\CoreWeb\Web.Service\obj\Debug\netcoreapp2.0\Web.S
 D:\我的项目\WebCore\Web.Service\bin\Debug\netcoreapp2.0\Web.Service.deps.json
 D:\我的项目\WebCore\Web.Service\bin\Debug\netcoreapp2.0\Web.Service.dll
 D:\我的项目\WebCore\Web.Service\bin\Debug\netcoreapp2.0\Web.Service.pdb
-D:\我的项目\WebCore\Web.Service\obj\Debug\netcoreapp2.0\Web.Service.csprojResolveAssemblyReference.cache
 D:\我的项目\WebCore\Web.Service\obj\Debug\netcoreapp2.0\Web.Service.csproj.CoreCompileInputs.cache
 D:\我的项目\WebCore\Web.Service\obj\Debug\netcoreapp2.0\Web.Service.AssemblyInfoInputs.cache
 D:\我的项目\WebCore\Web.Service\obj\Debug\netcoreapp2.0\Web.Service.AssemblyInfo.cs

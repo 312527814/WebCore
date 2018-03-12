@@ -35,7 +35,7 @@ namespace Web.Service
             ms.Dispose();
             cs.Dispose();
             return ret.ToString();
-        }
+        } 
         /// <summary>
         /// DES 解密方法
         /// </summary>
