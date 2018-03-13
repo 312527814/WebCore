@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,9 +9,20 @@ namespace WebCoreMvc
 {
     public class MySession : IMySession
     {
-        public MySession()
+        private IHttpContextAccessor accessor;
+        public MySession(IHttpContextAccessor accessor)
         {
+            this.accessor = accessor;
         }
-        public int UserId => 1;
+
+        public int UserId
+        {
+            get
+            {
+                var context = accessor.HttpContext;
+                var id = context.User.Claims.First(c => c.Type == "Id").Value;
+                return Convert.ToInt32(id);
+            }
+        }
     }
 }
