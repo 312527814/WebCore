@@ -7,10 +7,10 @@ using Microsoft.Extensions.Options;
 
 namespace Web.Service.DataRepository
 {
-    public class DapperModule : Module
+    public class DataRepositoryModule : Module
     {
 
-        //public DapperModule(IOptions<ConnectionSettings> conn)
+        //public DataRepositoryModule(IOptions<ConnectionSettings> conn)
         //{
         //    //ConnectionManager.MasterConnectionString = conn.Value.Main[0].DbContext;
         //    //ConnectionManager.ReadOnlyConnectionString = conn.Value.ReadOnly[0].DbContext;

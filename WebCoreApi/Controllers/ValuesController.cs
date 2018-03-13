@@ -5,19 +5,26 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
+using Web.Service.Domain;
 
-namespace Web.JwtApp.Controllers
+namespace WebCoreApi.Controllers
 {
     [Authorize(Roles = "2,1")]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-       
-       
+        Teacher teacher;
+        public ValuesController(Teacher teacher)
+        {
+            this.teacher = teacher;
+        }
+
+
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
+            await teacher.list("");
             return new string[] { "value1", "value2" };
         }
 

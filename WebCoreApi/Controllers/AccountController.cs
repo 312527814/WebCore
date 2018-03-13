@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 using WebCoreApi;
 using Web.Service;
 
-namespace Web.JwtApp.Controllers
+namespace WebCoreApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Account/[Action]")]
@@ -21,13 +21,13 @@ namespace Web.JwtApp.Controllers
     {
         public JwtSettings jwtSettings { get; set; }
         private ILogger logger;
-        public AccountController(IOptions<JwtSettings> options, ILoggerFactory loggerFactory)
-        {
+        //public AccountController(IOptions<JwtSettings> options, ILoggerFactory loggerFactory)
+        //{
 
-            jwtSettings = options.Value;
-            //this.logger = loggerFactory.CreateLogger<Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler>();
-            //logger.LogError("ddddd");
-        }
+        //    jwtSettings = options.Value;
+        //    //this.logger = loggerFactory.CreateLogger<Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler>();
+        //    //logger.LogError("ddddd");
+        //}
         public IActionResult myLogin()
         {
             /**
@@ -47,7 +47,7 @@ namespace Web.JwtApp.Controllers
             var token = new Token()
             {
                 Id = 1,
-                Roles = "2,1",
+                Roles = "1",
                 NotBefore = DateTime.Now,
                 expires = DateTime.Now.AddHours(1),
             };

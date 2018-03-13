@@ -4,19 +4,22 @@ using System.Text;
 using Web.Service.IRepository;
 using Web.Service.Interceptor;
 using System.Threading.Tasks;
+using Web.Service.Core;
 
 namespace Web.Service.Domain
 {
     public class Teacher : Entity
     {
+        private IMySession session;
         private ITeacherRepository teacherRepository;
         private IShoolRepository shoolRepository;
         public Teacher() { }
-        public Teacher(ITeacherRepository teacherRepository, IShoolRepository shoolRepository)
+        public Teacher(IMySession session, ITeacherRepository teacherRepository, IShoolRepository shoolRepository)
         {
+            this.session = session;
             this.teacherRepository = teacherRepository;
             this.shoolRepository = shoolRepository;
-    }
+        }
         public string Name { get; set; }
 
         public Teacher get(int id)

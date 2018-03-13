@@ -21,6 +21,7 @@ using System.IO;
 using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Net.Http.Headers;
+using Web.Service.Core;
 
 namespace WebCoreMvc
 {
@@ -44,8 +45,6 @@ namespace WebCoreMvc
             {
                 options.Filters.Add<HttpGlobalExceptionFilter>();
             });
-           
-            services.AddSingleton<DapperModule>();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -56,9 +55,9 @@ namespace WebCoreMvc
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
-            
-            containerBuilder.RegisterModule<DapperModule>();
-            containerBuilder.RegisterModule<CoreModule>();
+            containerBuilder.RegisterModule<DataRepositoryModule>();
+            containerBuilder.RegisterModule<ServiceModule>();
+            containerBuilder.RegisterType<MySession>().As<IMySession>().SingleInstance();
 
 
             containerBuilder.RegisterDynamicProxy();
@@ -73,30 +72,30 @@ namespace WebCoreMvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-           
+
             app.UseSession();
 
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //    app.UseBrowserLink();
-            //}
-            //else
-            //{
-            //    app.UseExceptionHandler("/Home/Error");
-            //}
-
-            app.UseExceptionHandler(new ExceptionHandlerOptions()
+            if (env.IsDevelopment())
             {
-                ExceptionHandler = context =>
-                {
-                    var ex = context.Features.Get<IExceptionHandlerPathFeature>().Error;
-                    context.Response.ContentLength = null;
-                    context.Response.ContentType = "";
-                    return Task.CompletedTask;
-                },
-                ExceptionHandlingPath = "/Home/Error"
-            });
+                app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            //app.UseExceptionHandler(new ExceptionHandlerOptions()
+            //{
+            //    ExceptionHandler = context =>
+            //    {
+            //        var ex = context.Features.Get<IExceptionHandlerPathFeature>().Error;
+            //        context.Response.ContentLength = null;
+            //        context.Response.ContentType = "";
+            //        return Task.CompletedTask;
+            //    },
+            //    ExceptionHandlingPath = "/Home/Error"
+            //});
 
             //app.UseDirectoryBrowser(
             //    new DirectoryBrowserOptions()
@@ -149,7 +148,7 @@ namespace WebCoreMvc
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            
+
 
             //app.Run(context =>
             //{

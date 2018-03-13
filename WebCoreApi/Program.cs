@@ -24,6 +24,7 @@ namespace Web.JwtApp
             .ConfigureAppConfiguration(con =>
             {
                 con.AddJsonFile("jwtsettings.json");
+                con.AddJsonFile("connectionsettings.json", true, false);
             })
                 .UseStartup<Startup>()
                 .Build();

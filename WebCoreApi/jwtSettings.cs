@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Web.JwtApp
+namespace WebCoreApi
 {
     public class JwtSettings
     {

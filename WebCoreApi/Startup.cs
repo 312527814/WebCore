@@ -12,6 +12,13 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Web.JwtApp;
+using Web.Service.DataRepository;
+using Autofac;
+using Web.Service;
+using Autofac.Extensions.DependencyInjection;
+using AspectCore.Extensions.Autofac;
+using Web.Service.Core;
+using WebCoreApi;
 
 namespace Web.JwtApp
 {
@@ -25,13 +32,13 @@ namespace Web.JwtApp
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-
+            services.Configure<ConnectionSettings>(Configuration);
             var jwtSettings = new JwtSettings();
             Configuration.Bind(jwtSettings);
             services.Configure<JwtSettings>(Configuration);
-            services.BuildServiceProvider().GetService<IOptions<JwtSettings>>();
+            //services.BuildServiceProvider().GetService<IOptions<JwtSettings>>();
             services.AddMvc();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -67,6 +74,26 @@ namespace Web.JwtApp
                     };
                    
                 });
+
+
+
+            // Add other framework services
+            // Add Autofac
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.Populate(services);
+            containerBuilder.RegisterModule<ServiceModule>();
+            containerBuilder.RegisterModule<DataRepositoryModule>();
+            containerBuilder.RegisterType(typeof(Token));
+            containerBuilder.RegisterType<MySession>().As<IMySession>().InstancePerLifetimeScope();
+
+
+            //containerBuilder.RegisterDynamicProxy();
+            var container = containerBuilder.Build();
+
+            var serviceProvider = new AutofacServiceProvider(container);
+
+            return serviceProvider;
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

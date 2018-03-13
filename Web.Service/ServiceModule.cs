@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Web.Service
 {
-    public class CoreModule : Module
+    public class ServiceModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {

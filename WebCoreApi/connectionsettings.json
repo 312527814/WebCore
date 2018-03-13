@@ -1,0 +1,15 @@
+{
+  "Master": [
+    {
+      "DbContext": "server=127.0.0.1;database=mytestMaster;uid=root;pwd=123456;charset='gbk';SslMode=None",
+      "weight": 100
+    }
+  ],
+  "ReadOnly": [
+    {
+      "DbContext": "server=127.0.0.1;database=mytestRead;uid=root;pwd=123456;charset='gbk';SslMode=None",
+      "weight": 40
+    }
+  ]
+
+}
