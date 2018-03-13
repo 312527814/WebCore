@@ -38,10 +38,14 @@ namespace Web.JwtApp
                 throw new Exception("Token失效");
             }
             validatedToken = null;
-            var claims = new Claim[] {
+            var claims = new List<Claim> {
                 new Claim("Id",token.Id.ToString()),
-                new Claim(ClaimTypes.Role,token.Roles),
             };
+            var roles = token.Roles.Split(',');
+            foreach (var item in roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, item));
+            }
 
             //var identity = new ClaimsIdentity(JwtBearerDefaults.AuthenticationScheme);
             //identity.AddClaim(new Claim("name", "jesse"));

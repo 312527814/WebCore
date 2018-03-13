@@ -6,17 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Options;
 using Web.Service.Domain;
+using Web.Service.Core;
 
 namespace WebCoreApi.Controllers
 {
-    [Authorize(Roles = "2,1")]
+    //[Authorize(Roles = "2,1")]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
+        IMySession session;
         Teacher teacher;
-        public ValuesController(Teacher teacher)
+        public ValuesController(Teacher teacher,IMySession session)
         {
             this.teacher = teacher;
+            this.session = session;
         }
 
 
@@ -24,6 +27,7 @@ namespace WebCoreApi.Controllers
         [HttpGet]
         public async Task<IEnumerable<string>> Get()
         {
+            //throw new Exception("dada");
             await teacher.list("");
             return new string[] { "value1", "value2" };
         }
@@ -32,7 +36,8 @@ namespace WebCoreApi.Controllers
         [HttpGet("{id}")]
         public string Get(int id)
         {
-            return "value";
+            return session.UserId.ToString();
+            //return "value";
         }
 
         // POST api/values

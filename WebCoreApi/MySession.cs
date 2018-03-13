@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,23 @@ namespace WebCoreApi
 {
     public class MySession : IMySession
     {
-        private Token token;
-        private HttpContext context;
+        private IHttpContextAccessor accessor;
         public MySession(IHttpContextAccessor accessor)
         {
-            this.context = accessor.HttpContext;
-            var base64Json = context.Request.Headers["token"];
-            var sbytes = Convert.FromBase64String(base64Json);
-            var json = Encoding.UTF8.GetString(sbytes);
-            token = Newtonsoft.Json.JsonConvert.DeserializeObject<Token>(json);
+            this.accessor = accessor;
         }
-        public int UserId => token.Id;
+        
+        public int UserId
+        {
+            get
+            {
+                var context = accessor.HttpContext;
+                var base64Json = context.Request.Headers["token"];
+                var sbytes = Convert.FromBase64String(base64Json);
+                var json = Encoding.UTF8.GetString(sbytes);
+                var token = Newtonsoft.Json.JsonConvert.DeserializeObject<Token>(json);
+                return token.Id;
+            }
+        }
     }
 }

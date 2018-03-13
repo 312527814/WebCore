@@ -19,8 +19,10 @@ using Autofac.Extensions.DependencyInjection;
 using AspectCore.Extensions.Autofac;
 using Web.Service.Core;
 using WebCoreApi;
+using WebCoreApi.filters;
+using Microsoft.AspNetCore.Http;
 
-namespace Web.JwtApp
+namespace WebCoreApi
 {
     public class Startup
     {
@@ -39,7 +41,12 @@ namespace Web.JwtApp
             Configuration.Bind(jwtSettings);
             services.Configure<JwtSettings>(Configuration);
             //services.BuildServiceProvider().GetService<IOptions<JwtSettings>>();
-            services.AddMvc();
+            services.AddMvc(
+                options =>
+                {
+                    options.Filters.Add<HttpGlobalExceptionFilter>();
+                }
+                );
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -72,22 +79,20 @@ namespace Web.JwtApp
                         }
 
                     };
-                   
+
                 });
-
-
-
+            services.AddLog4();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             // Add other framework services
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
             containerBuilder.Populate(services);
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterModule<DataRepositoryModule>();
-            containerBuilder.RegisterType(typeof(Token));
-            containerBuilder.RegisterType<MySession>().As<IMySession>().InstancePerLifetimeScope();
+            containerBuilder.RegisterType<MySession>().As<IMySession>().SingleInstance();
 
 
-            //containerBuilder.RegisterDynamicProxy();
+            containerBuilder.RegisterDynamicProxy();
             var container = containerBuilder.Build();
 
             var serviceProvider = new AutofacServiceProvider(container);
@@ -103,9 +108,10 @@ namespace Web.JwtApp
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseAuthentication();
             app.UseMvc();
-           
+
         }
     }
 }

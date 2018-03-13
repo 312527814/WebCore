@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using System.ComponentModel;
 using Microsoft.AspNetCore.Builder;
 
-namespace Web.JwtApp
+namespace WebCoreApi
 {
     public class Program
     {

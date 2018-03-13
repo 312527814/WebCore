@@ -43,6 +43,13 @@ namespace WebCoreMvc.Controllers
             return View();
         }
 
+        public string My2()
+        {
+
+           return  teacher.test();
+
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";

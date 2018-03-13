@@ -21,13 +21,13 @@ namespace WebCoreApi.Controllers
     {
         public JwtSettings jwtSettings { get; set; }
         private ILogger logger;
-        //public AccountController(IOptions<JwtSettings> options, ILoggerFactory loggerFactory)
-        //{
+        public AccountController(IOptions<JwtSettings> options, ILoggerFactory loggerFactory)
+        {
 
-        //    jwtSettings = options.Value;
-        //    //this.logger = loggerFactory.CreateLogger<Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler>();
-        //    //logger.LogError("ddddd");
-        //}
+            jwtSettings = options.Value;
+            //this.logger = loggerFactory.CreateLogger<Microsoft.AspNetCore.Mvc.Internal.MvcAttributeRouteHandler>();
+            //logger.LogError("ddddd");
+        }
         public IActionResult myLogin()
         {
             /**
@@ -46,8 +46,8 @@ namespace WebCoreApi.Controllers
     **/
             var token = new Token()
             {
-                Id = 1,
-                Roles = "1",
+                Id = 1023,
+                Roles = "1,2,3",
                 NotBefore = DateTime.Now,
                 expires = DateTime.Now.AddHours(1),
             };

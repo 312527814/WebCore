@@ -26,11 +26,14 @@ namespace Web.Service.Domain
         {
             return teacherRepository.Get(id);
         }
-
+        public string test()
+        {
+            return session.UserId.ToString();
+        }
         public async Task<IList<Teacher>> list(string name)
         {
+            var id = session.UserId;
             var s = teacherRepository.list(name);
-            shoolRepository.list();
             var s2 = teacherRepository.UseMasterConn<ITeacherRepository>().list(name);
             var s3 = teacherRepository.list(name);
 
