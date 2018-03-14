@@ -44,7 +44,7 @@ namespace Web.Service.Domain
             var s = teacherRepository.list(name);
             var s2 = teacherRepository.SetConnstr<ITeacherRepository>(c =>
             {
-                c.MasterConnstr = connectionManager.SlaveConnstr;
+                c.SlaveConnstr = connectionManager.MasterConnstr;
             }).list(name);
             var s3 = teacherRepository.list(name);
 
