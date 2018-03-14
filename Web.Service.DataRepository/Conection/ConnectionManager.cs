@@ -33,7 +33,7 @@ namespace Web.Service.DataRepository
 
         private string GetReadonlyConnstr()
         {
-            return connectionSettings.ReadOnly[0].DbContext;
+            return connectionSettings.Slave[0].DbContext;
         }
 
     }

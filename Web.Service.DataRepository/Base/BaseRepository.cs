@@ -16,10 +16,6 @@ namespace Web.Service.DataRepository
     {
         public DapperHelper dapperHelper { get; set; }
         protected string tableName;
-
-
-        public Func<bool, object> Fest { get; set; }
-        public string connectionStr { get; set; }
         public Action<IConnectionString> Invoke { get; set; }
 
         public BaseRepository(DapperHelper dapperHelper)

@@ -10,7 +10,6 @@ namespace Web.Service.IRepository
 {
     public interface IRepository<TEntity, TPrimaryKey> : IMasterReadSeparate where TEntity : IEntity<TPrimaryKey>
     {
-        string connectionStr { get; set; }
         #region Select
 
         TEntity Get(TPrimaryKey id);

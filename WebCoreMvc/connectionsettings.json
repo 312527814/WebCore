@@ -5,7 +5,7 @@
       "weight": 100
     }
   ],
-  "ReadOnly": [
+  "Slave": [
     {
       "DbContext": "server=127.0.0.1;database=mytestRead;uid=root;pwd=123456;charset='gbk';SslMode=None",
       "weight": 40

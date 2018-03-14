@@ -8,7 +8,7 @@ namespace Web.Service.DataRepository
     {
         public ConnectionStr[] Master { get; set; }
 
-        public ConnectionStr[] ReadOnly { get; set; }
+        public ConnectionStr[] Slave { get; set; }
 
     }
     public class ConnectionStr
