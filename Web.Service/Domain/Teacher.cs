@@ -31,7 +31,7 @@ namespace Web.Service.Domain
 
         public Teacher get(int id)
         {
-            return teacherRepository.Get(id);
+            return teacherRepository.Get(id); 
         }
         public string test()
         {
