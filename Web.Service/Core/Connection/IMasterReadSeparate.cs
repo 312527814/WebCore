@@ -9,13 +9,9 @@ namespace Web.Service.Connection
     /// </summary>
     public interface IMasterReadSeparate
     {
-        /// <summary>
-        /// 使用主数据库
-        /// </summary>
-        void UseMaster();
-        /// <summary>
-        /// 使用从数据库
-        /// </summary>
-        void UseRead();
+
+        Action<IConnectionString> Invoke { get; set; }
     }
+
+
 }

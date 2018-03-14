@@ -18,6 +18,15 @@ namespace Web.Service
             });
         }
 
+        public static Task Run(this IEntity entity, Action func)
+        {
+            return Task.Run(() =>
+            {
+                func();
+            });
+        }
+
+        /**
         /// <summary>
         /// 使用主数据链接
         /// </summary>
@@ -28,6 +37,15 @@ namespace Web.Service
             where Repository : IMasterReadSeparate
         {
             repository.UseMaster();
+            return (Repository)repository;
+        }
+        **/
+
+
+        public static Repository SetConnstr<Repository>(this IMasterReadSeparate repository, Action<IConnectionString> action)
+            where Repository : IMasterReadSeparate
+        {
+            repository.Invoke = action;
             return (Repository)repository;
         }
     }

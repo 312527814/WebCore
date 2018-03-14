@@ -15,12 +15,12 @@ namespace Web.Service.DataRepository
             this.connectionSettings = con.Value;
         }
 
-        public string MainConnstr
+        public string MasterConnstr
         {
             get { return GetMainConnstr(); }
             set { }
         }
-        public string ReadonlyConnstr
+        public string SlaveConnstr
         {
             get { return GetReadonlyConnstr(); }
             set { }

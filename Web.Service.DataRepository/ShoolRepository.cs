@@ -11,6 +11,13 @@ namespace Web.Service.DataRepository
         public ShoolRepository(DapperHelper dapperHelper) : base(dapperHelper)
         {
         }
+
+        public string Test()
+        {
+            return dapperHelper.Test();
+        }
+
+
         public void list()
         {
 

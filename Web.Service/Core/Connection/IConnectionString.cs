@@ -4,10 +4,9 @@ using System.Text;
 
 namespace Web.Service.Connection
 {
-    public interface IConnectionManager
+    public interface IConnectionString
     {
         string MasterConnstr { get; set; }
         string SlaveConnstr { get; set; }
-
     }
 }

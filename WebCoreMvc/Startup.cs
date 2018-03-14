@@ -50,7 +50,7 @@ namespace WebCoreMvc
                 {
                     options.LoginPath = "/Account/MyLogin";
                 });
-
+          
             // Add other framework services
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
@@ -58,7 +58,6 @@ namespace WebCoreMvc
             containerBuilder.RegisterModule<DataRepositoryModule>();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterType<MySession>().As<IMySession>().SingleInstance();
-
 
             containerBuilder.RegisterDynamicProxy();
             var container = containerBuilder.Build();

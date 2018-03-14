@@ -7,6 +7,7 @@ namespace Web.Service.IRepository
 {
     public interface IShoolRepository : IRepository<Shool, int>
     {
+        string Test();
         void list();
     }
 }

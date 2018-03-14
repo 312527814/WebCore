@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using AspectCore.DynamicProxy;
 using AspectCore.DynamicProxy.Parameters;
+using Web.Service.Core;
+using Web.Service.Connection;
 
 namespace Web.Service.Interceptor
 {

@@ -10,118 +10,50 @@ using static Dapper.SqlMapper;
 
 namespace Web.Service.DataRepository
 {
-    public class DapperHelper
+    public class DapperHelper : IConnectionString
     {
+        public string MasterConnstr { get; set; }
 
-
-        public IConnectionManager connManager;
-        public string Connstr { get; set; }
+        public string SlaveConnstr { get; set; }
 
         public DapperHelper(IConnectionManager connManager)
         {
-            this.connManager = connManager;
-        }
-
-        public void UseMainConnstr()
-        {
-            Connstr = connManager.MainConnstr;
-        }
-        public void UseReadConnstr()
-        {
-            Connstr = connManager.ReadonlyConnstr;
+            this.MasterConnstr = connManager.MasterConnstr;
+            this.SlaveConnstr = connManager.SlaveConnstr;
         }
 
         public TModel FirstOrDefault<TModel>(string sql, object parament = null)
         {
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    return conn.QueryFirstOrDefault<TModel>(sql, parament);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
+                return conn.QueryFirstOrDefault<TModel>(sql, parament);
             }
         }
         public IEnumerable<TModel> Query<TModel>(string sql, object parament = null)
         {
-
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    return conn.Query<TModel>(sql, parament);
-                }
+                return conn.Query<TModel>(sql, parament);
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
-            }
-
         }
 
         public void QueryMultiple(string sql, object parament, Action<GridReader> readResult)
         {
-
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    var read = conn.QueryMultiple(sql, parament);
-                    readResult(read);
-                }
+                var read = conn.QueryMultiple(sql, parament);
+                readResult(read);
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
-            }
-
         }
 
         public T Scalar<T>(string sql, object parament = null)
         {
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    return conn.ExecuteScalar<T>(sql, parament);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
+                return conn.ExecuteScalar<T>(sql, parament);
             }
         }
-        
+
         public PageEntity<TModel> Pagination<TModel>(string sql, int currentIndex, int pageSize, string fields = "*", string orderBy = "Id", object parament = null, bool isExactCount = true)
         {
             var result = new PageEntity<TModel>();
@@ -134,99 +66,56 @@ namespace Web.Service.DataRepository
             {
                 excuteSql += $";explain {sql}";
             }
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
+                var read = conn.QueryMultiple(sql, parament);
+                result.List = read.Read<TModel>();
+                if (isExactCount)
                 {
-                    var read = conn.QueryMultiple(sql, parament);
-                    result.List = read.Read<TModel>();
-                    if (isExactCount)
-                    {
-                        result.Count = read.Read<int>().Single();
-                    }
-                    else
-                    {
-                        result.Count = Convert.ToInt32(read.Read().First().rows);
-                    }
+                    result.Count = read.Read<int>().Single();
+                }
+                else
+                {
+                    result.Count = Convert.ToInt32(read.Read().First().rows);
                 }
             }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
-            }
-            
             return result;
         }
 
         public int Execute(string sql, object parament = null)
         {
-            using (var conn = new MySqlConnection(connManager.MainConnstr))
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
                 return conn.Execute(sql, parament);
             }
         }
         public int ExecProc(string procName, object parament = null)
         {
-            using (var conn = new MySqlConnection(connManager.MainConnstr))
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
                 return conn.Execute(procName, parament, commandType: System.Data.CommandType.StoredProcedure);
             }
         }
         public int ExecProc(string procName, object parament, int outTimes)
         {
-            using (var conn = new MySqlConnection(connManager.MainConnstr))
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
                 return conn.Execute(procName, parament, commandTimeout: outTimes, commandType: System.Data.CommandType.StoredProcedure);
             }
         }
         public IEnumerable<TModel> ExecProc<TModel>(string procName, object parament = null)
         {
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    return conn.Query<TModel>(procName, parament, commandType: System.Data.CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
+                return conn.Query<TModel>(procName, parament, commandType: System.Data.CommandType.StoredProcedure);
             }
         }
 
         public IEnumerable<TModel> ExecProc<TModel>(string procName, object parament, int outTimes)
         {
-            var connstr = string.IsNullOrEmpty(Connstr) ? connManager.ReadonlyConnstr : Connstr;
-            try
+            using (var conn = new MySqlConnection(SlaveConnstr))
             {
-                using (var conn = new MySqlConnection(connstr))
-                {
-                    return conn.Query<TModel>(procName, parament, commandTimeout: outTimes, commandType: System.Data.CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                if (!string.IsNullOrEmpty(connstr))
-                    Connstr = null;
+                return conn.Query<TModel>(procName, parament, commandTimeout: outTimes, commandType: System.Data.CommandType.StoredProcedure);
             }
         }
 

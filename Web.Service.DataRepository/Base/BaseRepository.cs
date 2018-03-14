@@ -12,10 +12,15 @@ using System.Linq;
 
 namespace Web.Service.DataRepository
 {
-    public abstract class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : IEntity<TPrimaryKey>
+    public abstract class BaseRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>, IDapper where TEntity : IEntity<TPrimaryKey>
     {
-        public DapperHelper dapperHelper;
+        public DapperHelper dapperHelper { get; set; }
         protected string tableName;
+
+
+        public Func<bool, object> Fest { get; set; }
+        public string connectionStr { get; set; }
+        public Action<IConnectionString> Invoke { get; set; }
 
         public BaseRepository(DapperHelper dapperHelper)
         {
@@ -23,16 +28,21 @@ namespace Web.Service.DataRepository
             tableName = typeof(TEntity).Name;
         }
 
-        public void UseMaster()
-        {
-            dapperHelper.Connstr = dapperHelper.connManager.MainConnstr;
-        }
-        public void UseRead()
-        {
-            dapperHelper.Connstr = dapperHelper.connManager.ReadonlyConnstr;
-        }
+        //public void UseMaster()
+        //{
+        //    //dapperHelper.Connstr = dapperHelper.connManager.MasterConnstr;
+        //}
+        //public void UseRead()
+        //{
+        //    //dapperHelper.Connstr = dapperHelper.connManager.ReadonlyConnstr;
+        //}
 
 
+
+        //public void Invoker(Action<IConnectionString> action)
+        //{
+        //    action(dapperHelper);
+        //}
         #region select
 
 
@@ -44,7 +54,7 @@ namespace Web.Service.DataRepository
             return dapperHelper.FirstOrDefault<TEntity>(sql, new { Id = id });
         }
 
-        
+
 
         #endregion
 
@@ -113,6 +123,12 @@ namespace Web.Service.DataRepository
             });
             return list;
         }
+
+
+
+
+
+
         #endregion
 
 

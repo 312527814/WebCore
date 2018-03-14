@@ -9,9 +9,11 @@ using System.Data.Common;
 using System.Linq;
 using System.Dynamic;
 using Web.Service.Connection;
+using Web.Service.DataRepository.Interceptor;
 
 namespace Web.Service.DataRepository
 {
+    [MasterSlaveInterceptorAttribute]
     public class TeacherRepository : Repository<Teacher>, ITeacherRepository
     {
         public TeacherRepository(DapperHelper dapperHelper) : base(dapperHelper)

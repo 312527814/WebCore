@@ -29,6 +29,7 @@ namespace WebCoreApi.Controllers
         {
             //throw new Exception("dada");
             await teacher.list("");
+
             return new string[] { "value1", "value2" };
         }
 

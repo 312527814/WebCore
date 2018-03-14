@@ -5,17 +5,24 @@ using Web.Service.IRepository;
 using Web.Service.Interceptor;
 using System.Threading.Tasks;
 using Web.Service.Core;
+using Web.Service.Connection;
 
 namespace Web.Service.Domain
 {
     public class Teacher : Entity
     {
+        IConnectionManager connectionManager;
         private IMySession session;
         private ITeacherRepository teacherRepository;
         private IShoolRepository shoolRepository;
         public Teacher() { }
-        public Teacher(IMySession session, ITeacherRepository teacherRepository, IShoolRepository shoolRepository)
+        public Teacher(
+            IConnectionManager connectionManager,
+            IMySession session,
+            ITeacherRepository teacherRepository,
+            IShoolRepository shoolRepository)
         {
+            this.connectionManager = connectionManager;
             this.session = session;
             this.teacherRepository = teacherRepository;
             this.shoolRepository = shoolRepository;
@@ -32,14 +39,18 @@ namespace Web.Service.Domain
         }
         public async Task<IList<Teacher>> list(string name)
         {
+
             var id = session.UserId;
             var s = teacherRepository.list(name);
-            var s2 = teacherRepository.UseMasterConn<ITeacherRepository>().list(name);
+            var s2 = teacherRepository.SetConnstr<ITeacherRepository>(c =>
+            {
+                c.MasterConnstr = connectionManager.SlaveConnstr;
+            }).list(name);
             var s3 = teacherRepository.list(name);
 
             return await this.Run(() =>
            {
-               return teacherRepository.UseMasterConn<ITeacherRepository>().list(name);
+               return teacherRepository.list(name);
            });
 
         }
