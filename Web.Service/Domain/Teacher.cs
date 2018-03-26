@@ -41,16 +41,20 @@ namespace Web.Service.Domain
         {
 
             var id = session.UserId;
-            var s = teacherRepository.list(name);
-            var s2 = teacherRepository.SetConnstr<ITeacherRepository>(c =>
+            this.Run(() =>
             {
-                c.SlaveConnstr = connectionManager.MasterConnstr;
-            }).list(name);
-            var s3 = teacherRepository.list(name);
+                var s2 = teacherRepository.SetConnstr<ITeacherRepository>(c =>
+                {
+                    c.SlaveConnstr = connectionManager.MasterConnstr;
+                    System.Threading.Thread.Sleep(1000 * 10);
+                }).list("1");
+            });
+            System.Threading.Thread.Sleep(1000 * 2);
+            var s3 = teacherRepository.list("2");
 
             return await this.Run(() =>
            {
-               return teacherRepository.list(name);
+               return new List<Teacher>(); //teacherRepository.list(name);
            });
 
         }

@@ -40,7 +40,24 @@ namespace WebCoreApi
             var jwtSettings = new JwtSettings();
             Configuration.Bind(jwtSettings);
             services.Configure<JwtSettings>(Configuration);
+
             //services.BuildServiceProvider().GetService<IOptions<JwtSettings>>();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                {
+                    builder//.SetPreflightMaxAge(new TimeSpan(24, 0, 0))
+
+                        .AllowAnyOrigin()//允许任何来源的主机访问
+                                         //.SetIsOriginAllowed(org => org== "http://localhost:57085");
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .AllowCredentials();//指定处理cookie
+                                            //.WithOrigins("http://localhost:57085/");
+
+                });
+            });
+
             services.AddMvc(
                 options =>
                 {
@@ -108,7 +125,7 @@ namespace WebCoreApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors("any");
             app.UseAuthentication();
             app.UseMvc();
 

@@ -1,0 +1,1 @@
+﻿ko.components.register('X01', { require: 'Pages/MyTest' });

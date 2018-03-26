@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Test";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+@*<input type="text" data-bind="value:Name" name="name" value="" />
+<input type="text" data-bind="value:Name" name="name" value="" />*@
+<div data-bind='component: {
+     name: "message-editor",
+     params: { productName: Name }
+}'></div>
+@section Scripts {
+@*<script src="/js/require.js" data-main="/View/Home/Test.js"></script>*@
+
+    <script type="text/javascript">
+
+        ko.components.register('message-editor', {
+            viewModel: function (params) {
+                var viewModel = {};
+                viewModel.Name = ko.observable("zhangsan");
+                return viewModel;
+            },
+            template: 'Message: <input data-bind="value: Name" /> '
+        });
+        var model = {
+
+            Name: "dd"
+        };
+        ko.applyBindings(model);
+    </script>
+}
+
+

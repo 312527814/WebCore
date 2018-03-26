@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewData["Title"] = "MyTest";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+<ul>
+    <li><a href="#/author">#/author</a></li>
+    <li><a href="#/books">#/books</a></li>
+    <li><a href="#/books/view/1">#/books/view/1</a></li>
+    <li><a href="#/books/view/1/2">#/books/view/1/2</a></li>
+</ul>
+@section Scripts {
+    <script src="/js/director.js"></script>
+    <script type="text/javascript">
+        var author = function () { console.log("author"); },
+            books = function () { console.log("books"); },
+            viewBook = function (aa, bookId) {
+                debugger;
+                console.log("viewBook: bookId is populated: aa=" + aa + " bookId " + bookId );
+            };
+
+        var routes = {
+            '/author': author,
+            '/books': [books, function () { console.log("An inline route handler."); }],
+            '/books/view/:bookId/:aa': viewBook
+        };
+
+        var router = Router(routes);
+        router.init();
+    </script>
+}

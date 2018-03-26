@@ -38,7 +38,7 @@ namespace WebCoreMvc.Controllers
         {
 
             await teacher.list("");
-            
+
 
             return View();
         }
@@ -46,7 +46,7 @@ namespace WebCoreMvc.Controllers
         public string My2()
         {
 
-           return  teacher.test();
+            return teacher.test();
 
         }
 
@@ -59,7 +59,7 @@ namespace WebCoreMvc.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
-            
+
             return View();
         }
 
@@ -71,6 +71,21 @@ namespace WebCoreMvc.Controllers
         public string SS()
         {
             return "DDD";
+        }
+
+        public IActionResult Test()
+        {
+            return View();
+        }
+
+        public IActionResult MyTest()
+        {
+            return View();
+        }
+
+        public IActionResult Main()
+        {
+            return View();
         }
     }
 }

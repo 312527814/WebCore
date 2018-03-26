@@ -12,10 +12,6 @@ namespace Web.Service.DataRepository
         {
         }
 
-        public string Test()
-        {
-            return dapperHelper.Test();
-        }
 
 
         public void list()
