@@ -4,31 +4,11 @@
     Layout = "~/Views/Shared/_MyLayout.cshtml";
 }
 <h2>Mian</h2>
-<ul>
-    <li><a href="#/author">#/author</a></li>
-    <li><a href="#/books">#/books</a></li>
-    <li><a href="#/books/view/1">#/books/view/1</a></li>
-</ul>
+
 <div data-bind='component: {
-     name: ComponentName,
-     params:RouterParams
+     name: componentName,
+     params:params
 }'></div>
 @section Scripts {
-@*<script src="~/js/require.js"></script>*@
     <script src="/js/require.js" data-main="/js/main.js"></script>
-    <script type="text/javascript">
-        //ko.components.register('X01', {
-        //    require: 'Pages/MyTest'
-        //});
-
-        //ko.components.register('message-editor', {
-        //    viewModel: function (params) {
-        //        var viewModel = {};
-        //        viewModel.Name = ko.observable("zhangsan");
-        //        return viewModel;
-        //    },
-        //    template: 'Message: <input data-bind="value: Name" /> '
-        //});
-        //ko.applyBindings();
-    </script>
 }

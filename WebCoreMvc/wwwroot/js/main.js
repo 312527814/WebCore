@@ -5,38 +5,24 @@
         paths: {
             'text': 'js/text',
             'director': 'js/director',
-            'componentsRegister': 'js/componentsRegister'
-        }
+            'componentsRegister': 'js/componentsRegister',
+            'routeMap': 'js/routeMap'
+        },
+        urlArgs: 'v=1.0' + new Date().getTime()
     });
-    //var s = window.location.pathname.split('/');
-    //var m = "View/" + s[1] + "/" + s[2];
-    //require([m], function (s) {
-
-    //});
-
-    require(['director', 'componentsRegister'], function () {
-        var author = function () { console.log("author"); },
-            books = function () { console.log("books"); },
-            viewBook = function (bookId) { console.log("viewBook: bookId is populated: " + bookId); };
-
-        var menu = [
-            {
-                url: '/author', componet: 'x01',
-            },
-            { url: '/books/view/:bookId', componet: 'X01', params: ["bookId"] }
-        ]
+    require(['director', 'componentsRegister', 'routeMap'], function () {
         var viewModel = {};
-        viewModel.ComponentName = ko.observable();
-        viewModel.RouterParams = ko.observable();
+        viewModel.componentName = ko.observable();
+        viewModel.params = ko.observable();
         var routes = {};
-        menu.forEach(function (item) {
+        routeMaps.forEach(function (item) {
             routes[item.url] = function () {
                 var json = {};
                 for (var i = 0; i < arguments.length; i++) {
                     json[item.params[i]] = arguments[i];
                 }
-                viewModel.RouterParams = json;
-                viewModel.ComponentName(item.componet);
+                viewModel.componentName(item.componet);
+                viewModel.params(json);
             };
         });
 
@@ -59,8 +45,6 @@
 
         var router = Router(routes);
         router.init();
-
-
         ko.applyBindings(viewModel);
     });
 })();

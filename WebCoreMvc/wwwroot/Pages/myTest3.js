@@ -1,7 +1,8 @@
-﻿define(['text!./MyTest.html'], function (htmlstr) {
+﻿define(['text!./myTest3.html'], function (htmlstr) {
     function view(param) {
         var viewModel = {};
-        viewModel.Name = ko.observable('222');
+        viewModel.id = ko.observable(param.id);
+        viewModel.name = ko.observable(param.name);
         return viewModel;
     }
     return {
