@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service", "Web.Service\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web.Service.DataRepository", "Web.Service.DataRepository\Web.Service.DataRepository.csproj", "{81CDC770-8056-4EF0-B82D-9D2F01933B3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebCoreApi", "WebCoreApi\WebCoreApi.csproj", "{16611272-3B3F-431D-9A0B-EA573E1A5249}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebCoreApi", "WebCoreApi\WebCoreApi.csproj", "{16611272-3B3F-431D-9A0B-EA573E1A5249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

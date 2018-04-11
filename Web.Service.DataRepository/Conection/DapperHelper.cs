@@ -60,7 +60,7 @@ namespace Web.Service.DataRepository
             var excuteSql = $"select {fields} from ( {sql} )as pag order by {orderBy} limit {pageSize * (currentIndex - 1)},{pageSize}";
             if (isExactCount)
             {
-                excuteSql += ";select count(*) from {sql} as C";
+                excuteSql += $";select count(*) from {sql} as C";
             }
             else
             {

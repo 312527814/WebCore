@@ -24,10 +24,13 @@ namespace WebCoreMvc.Controllers
         }
         public IActionResult Index()
         {
+            var t = Task.Run(() => { });
+            t.Wait();
             foreach (var item in HttpContext.User.Claims)
             {
 
             }
+        
             var role = HttpContext.User.Claims.First(s => s.Type == ClaimTypes.Role);
             var id = HttpContext.User.Claims.First(s => s.Type == "Id");
             return View();

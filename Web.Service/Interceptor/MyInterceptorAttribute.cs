@@ -22,6 +22,14 @@ namespace Web.Service.Interceptor
     {
         public override async Task Invoke(ParameterAspectContext context, ParameterAspectDelegate next)
         {
+            
+            await next(context);
+        }
+    }
+    public class NyInterceptor : AbstractInterceptor
+    {
+        public override async Task Invoke(AspectContext context, AspectDelegate next)
+        {
             await next(context);
         }
     }

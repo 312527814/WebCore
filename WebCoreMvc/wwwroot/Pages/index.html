@@ -1,8 +1,22 @@
 ﻿<div data-bind="text:text">
-    
+
 </div>
 <ul>
-    <li><a  target="_blank" href="#/MyTest">MyTest</a></li>
+    <li><a target="_blank" href="#/MyTest">MyTest</a></li>
     <li><a href="#/myTest2/s">MyTest2</a></li>
-    <li><a href="#/myTest3/2/张三">MyTest3</a></li>
+    <li><a data-bind="attr: { href: href}">MyTest3</a></li>
 </ul>
+<div style="height:800px;background-color:azure">
+    <div style="background-color:darkkhaki">
+        <div style="height:100px; width:100%; background-color:red">
+
+        </div>
+        <div style="height:80%;overflow:auto;background-color:antiquewhite">
+            高度80%
+            <div style="height:700px; width:100%; background-color:antiquewhite">
+
+            </div>
+        </div>
+    </div>
+    
+</div>

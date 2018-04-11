@@ -22,6 +22,9 @@ using System.Text;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.Net.Http.Headers;
 using Web.Service.Core;
+using AspectCore.Extensions.DependencyInjection;
+using AspectCore.Configuration;
+using AspectCore.DynamicProxy.Parameters;
 
 namespace WebCoreMvc
 {
@@ -50,7 +53,7 @@ namespace WebCoreMvc
                 {
                     options.LoginPath = "/Account/MyLogin";
                 });
-          
+
             // Add other framework services
             // Add Autofac
             var containerBuilder = new ContainerBuilder();
@@ -58,7 +61,10 @@ namespace WebCoreMvc
             containerBuilder.RegisterModule<DataRepositoryModule>();
             containerBuilder.RegisterModule<ServiceModule>();
             containerBuilder.RegisterType<MySession>().As<IMySession>().SingleInstance();
-
+            //services.AddDynamicProxy(config =>
+            //{
+            //    config.Interceptors.AddTyped<Web.Service.Interceptor.MyInterceptorAttribute>();
+            //});
             containerBuilder.RegisterDynamicProxy();
             var container = containerBuilder.Build();
 
@@ -73,7 +79,7 @@ namespace WebCoreMvc
         {
 
             app.UseSession();
-
+      
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -151,9 +157,9 @@ namespace WebCoreMvc
 
             //app.Run(context =>
             //{
+            //    throw new Exception("dd");
             //    return Task.CompletedTask;
             //});
-
 
         }
 

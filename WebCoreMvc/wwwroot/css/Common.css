@@ -1,0 +1,13 @@
+﻿@media screen and (max-width: 767px) {
+    /* Hide captions */
+    body {
+        background-color:pink
+    }
+}
+
+@media screen and (max-width: 500px) {
+    /* Hide captions */
+    body {
+        background-color:red
+    }
+}

@@ -39,16 +39,8 @@ namespace Web.Service.Domain
         }
         public async Task<IList<Teacher>> list(string name)
         {
-
+            await TestError("dd");
             var id = session.UserId;
-            this.Run(() =>
-            {
-                var s2 = teacherRepository.SetConnstr<ITeacherRepository>(c =>
-                {
-                    c.SlaveConnstr = connectionManager.MasterConnstr;
-                    System.Threading.Thread.Sleep(1000 * 10);
-                }).list("1");
-            });
             System.Threading.Thread.Sleep(1000 * 2);
             var s3 = teacherRepository.list("2");
 
@@ -61,6 +53,7 @@ namespace Web.Service.Domain
 
         public async Task TestError([Ny]string s)
         {
+
 
             await Task.Run(() =>
             {
